@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    
+    <head></head>
+    
+<body>
+    
+    <% if check_nil %>
+     <table style="text-align: left">
+         <p id="IF"><b>Input Format</b></p>
+         <form>
+             <tr><p style="display:inline">True symbol:</p> <input type="text"  name="true" /><br></tr>
+             <tr><p style="display:inline">False symbol:</p>  <input type="text"  name="false" /><br></tr>
+             <tr><p style="display:inline">Size (2^x):</p>  <input type="text" name="size" /><br></tr>
+             <tr><input id="sub" type="submit"  value="Show truth table" /><br></tr>
+         </form>
+    </table>
+    <a href="/" >Relaod page</a>
+    
+    <% elsif !check_nil && !valid %>
+    <h1>ERROR</h1>
+    <h1>Invalid parameters.</h1>
+    <pre>True: <%= true_value %>    False: <%= false_value %>     Size: <%= size_blocks %></pre>
+    <p>Please enter:</p>
+    <p>  1.A single-character true symbol</p>
+    <p>  2.A single-character false symbol</p>
+    <p>  3.A size greater than or equal to 2</p>
+    <p>  4.Different characters for true and false symbols</p>
+    <a href="/">Back to main page</a>
+    
+    <% elsif !check_nil && valid %>
+    <table>
+        <tr>
+            <% for i in (0...size_blocks).to_a.reverse %>
+              <th><%= "#{i}" %></th>
+            <% end %>
+            <th>AND</th>
+            <th>OR</th>
+            <th>NAND</th>
+            <th>NOR</th>
+            <th>XOR</th>
+            <th>SINGLE</th>
+        </tr>
+       <% for i in 0...rows %>
+        <tr>
+            <% for j in 0...hm[i].size %>
+            <td><%= hm[i][j] %></td>
+            <% end %>
+        </tr>
+        <% end %>
+        
+        
+    </table>
+    <a href="http://localhost:4567/?true=<%= true_value %>&false=<%= false_value %>&size=<%= size_blocks %>" download="<%= true_value %><%= false_value %><%= size_blocks %>">Save</a>
+    <a href="/">Back to main page</a>
+    <% end %>
+    
+    
+    
+</body>
+</html>
